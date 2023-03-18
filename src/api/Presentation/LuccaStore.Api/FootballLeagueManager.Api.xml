@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LuccaStore.Api</name>
+    </assembly>
+    <members>
+        <member name="T:LuccaStore.Api.Controllers.IdentityController">
+            <summary>
+            Identity Endpoints
+            </summary>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.IdentityController.Login(LuccaStore.Core.Domain.Dtos.Identity.LoginRequestDto,LuccaStore.Api.Validators.Identity.LoginRequestDtoValidator)">
+            <summary>
+            Login to the api.
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+            <returns>Return an access token.</returns>
+            <response code="200">The access token.</response>
+            <response code="400">Error message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.IdentityController.RegisterAdmin(LuccaStore.Core.Domain.Dtos.Identity.RegisterRequestDto,LuccaStore.Api.Validators.Identity.RegisterRequestDtoValidator)">
+            <summary>
+            Register new user with Adim and User roles.
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+            <returns>Returns the username and email of a new user.</returns>
+            <response code="200">Returns the username and email of a new user.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.IdentityController.Register(LuccaStore.Core.Domain.Dtos.Identity.RegisterRequestDto,LuccaStore.Api.Validators.Identity.RegisterRequestDtoValidator)">
+            <summary>
+            Register new user with User roles.
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+            <returns>Returns the username and email of a new user.</returns>
+            <response code="200">Returns the username and email of a new user.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.IdentityController.Unregister(LuccaStore.Core.Domain.Dtos.Identity.UnregisterRequestDto,LuccaStore.Api.Validators.Identity.UnregisterRequestDtoValidator)">
+            <summary>
+            Delete a registered user.
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+            <returns>Returns the username of the deleted user.</returns>
+            <response code="200">Returns the username of the deleted user.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+        </member>
+    </members>
+</doc>
