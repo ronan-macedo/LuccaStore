@@ -12,7 +12,7 @@ namespace LuccaStore.Api.Controllers
     /// <summary>
     /// Identity Endpoints
     /// </summary>
-    [Route("flm-api/v1/identity")]
+    [Route("lucca-store-api/v1/identity")]
     public class IdentityController : ApiControllerBase
     {
         private readonly IIdentityService _identityService;
@@ -30,8 +30,8 @@ namespace LuccaStore.Api.Controllers
         /// <returns>Return an access token.</returns>
         /// <response code="200">The access token.</response>
         /// <response code="400">Error message.</response>
-        [HttpPost("login")]
         [AllowAnonymous]
+        [HttpPost("login")]        
         [ProducesResponseType(typeof(LoginResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<LoginResponseDto>> Login(LoginRequestDto request,

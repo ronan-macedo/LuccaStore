@@ -119,7 +119,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Football League Manager API",
+        Title = "Lucca Store API",
         Version = "v 1.0.0"
     });
 
@@ -154,7 +154,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League Manager API"));    
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lucca Store API"));    
 }
 
 // Add Middleware to handle the Unauthorize message

@@ -81,8 +81,7 @@ namespace LuccaStore.Infrastructure.Data.Context
                 {
                     RoleId = userRoleId,
                     UserId = userId
-                }
-                );
+                });
 
 
         }
