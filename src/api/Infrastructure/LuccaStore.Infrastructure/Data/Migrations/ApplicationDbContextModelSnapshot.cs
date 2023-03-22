@@ -204,6 +204,22 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1eb31813-4461-45ef-bc22-2f174fd8b477",
+                            ConcurrencyStamp = "1eb31813-4461-45ef-bc22-2f174fd8b477",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "e5c63c5b-c276-460f-a7a3-dfd9177ed18f",
+                            ConcurrencyStamp = "e5c63c5b-c276-460f-a7a3-dfd9177ed18f",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -293,6 +309,24 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f01f0b8e-f9c8-4e99-86b9-e5fe37451282",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2e891d14-d7da-48a2-8186-64adc45ce835",
+                            Email = "admin@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@EMAIL.COM",
+                            NormalizedUserName = "ADMIN.USER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL5xA3bVli+ZLZSw+IOROIVVm+5abDQtkOJuOfdaXdjIvg1uvpp7GGlxTZfgjZcboA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8c43f6ff-be0a-4e72-b2aa-f6e37d38dbf2",
+                            TwoFactorEnabled = false,
+                            UserName = "admin.user"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -355,6 +389,18 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "f01f0b8e-f9c8-4e99-86b9-e5fe37451282",
+                            RoleId = "1eb31813-4461-45ef-bc22-2f174fd8b477"
+                        },
+                        new
+                        {
+                            UserId = "f01f0b8e-f9c8-4e99-86b9-e5fe37451282",
+                            RoleId = "e5c63c5b-c276-460f-a7a3-dfd9177ed18f"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

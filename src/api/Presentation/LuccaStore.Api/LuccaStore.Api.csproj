@@ -8,7 +8,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>FootballLeagueManager.Api.xml</DocumentationFile>
+    <DocumentationFile>LuccaStore.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -31,6 +31,10 @@
     <ProjectReference Include="..\..\Core\Application\LuccaStore.Core.Application\LuccaStore.Core.Application.csproj" />    
     <ProjectReference Include="..\..\Core\Domain\LuccaStore.Core.Domain\LuccaStore.Core.Domain.csproj" />    
     <ProjectReference Include="..\..\Infrastructure\LuccaStore.Infrastructure\LuccaStore.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DocFileItem Remove="LuccaStore.Api.xml" />
   </ItemGroup>
 
 </Project>

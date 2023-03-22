@@ -1,5 +1,5 @@
 {
   "ConnectionStrings": {
-    "Postgres": "Host=localhost;Port=5432;Database=luccastoredb;Username=postgres;Password=S3nha#2021"
+    "Postgres": "Host=localhost;Port=5432;Database=luccastoredb;Username=postgres;Password=P@55w0rd#2023"
   }
 }

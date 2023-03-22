@@ -68,7 +68,7 @@ namespace LuccaStore.Api.Controllers
         /// <returns>Returns the username and email of a new user.</returns>
         /// <response code="200">Returns the username and email of a new user.</response>
         /// <response code="400">Error message.</response>
-        /// <response code="401">The unauthorized message.</response>
+        /// <response code="401">The unauthorized message.</response>]        
         [Authorize(Roles = "Admin")]
         [HttpPost("register-admin")]
         [ProducesResponseType(typeof(RegisterResponseDto), StatusCodes.Status200OK)]

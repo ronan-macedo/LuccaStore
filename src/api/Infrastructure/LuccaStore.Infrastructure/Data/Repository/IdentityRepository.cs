@@ -36,7 +36,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
             }
 
             throw new AuthorizationException(MessageTemplate.InvalidCredentialsMessage,
-                                                 MessageTemplate.InvalidCredentialsError);
+                                             MessageTemplate.InvalidCredentialsError);
         }
 
         public async Task RegisterAdminAsync(RegisterModel register)
@@ -45,7 +45,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
             if (userExists != null)
             {
                 throw new InvalidParametersException(MessageTemplate.UserExistsMessage,
-                                                    MessageTemplate.InvalidUserError);
+                                                     MessageTemplate.InvalidUserError);
             }
 
             var user = new IdentityUser
@@ -60,17 +60,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
             if (!result.Succeeded)
             {
                 throw new InvalidParametersException(MessageTemplate.RegistrationErrorMessage,
-                                                    MessageTemplate.RegistrationError);
-            }
-
-            // Add Roles to the DB if they not exists
-            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            }
-            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                                                     MessageTemplate.RegistrationError);
             }
 
             // Add Roles to the User
@@ -81,7 +71,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
             if (await _roleManager.RoleExistsAsync(UserRoles.User))
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
-            }            
+            }
         }
 
         public async Task RegisterAsync(RegisterModel register)
@@ -108,14 +98,10 @@ namespace LuccaStore.Infrastructure.Data.Repository
                                                     MessageTemplate.RegistrationError);
             }
 
-            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-            {
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-            }
             if (await _roleManager.RoleExistsAsync(UserRoles.User))
             {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
-            }            
+            }
         }
 
         public async Task UnregisterAsync(UnregisterModel unregister)
@@ -129,10 +115,10 @@ namespace LuccaStore.Infrastructure.Data.Repository
 
             var result = await _userManager.DeleteAsync(user);
             if (!result.Succeeded)
-            {                
+            {
                 throw new InvalidParametersException(MessageTemplate.UnregistrationError,
                                                      MessageTemplate.UnregistrationErrorMessage);
-            }            
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace LuccaStore.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
@@ -194,7 +196,6 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                     ProductName = table.Column<string>(type: "text", nullable: false),
                     ProductDescription = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<double>(type: "double precision", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -232,10 +233,32 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Storages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    QuantityInStorage = table.Column<double>(type: "double precision", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Storages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Storages_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderLines",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Quantity = table.Column<double>(type: "double precision", nullable: false),
                     ProductId = table.Column<Guid>(type: "uuid", nullable: false),
                     OrderId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -256,6 +279,29 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1eb31813-4461-45ef-bc22-2f174fd8b477", "1eb31813-4461-45ef-bc22-2f174fd8b477", "Admin", "ADMIN" },
+                    { "e5c63c5b-c276-460f-a7a3-dfd9177ed18f", "e5c63c5b-c276-460f-a7a3-dfd9177ed18f", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "f01f0b8e-f9c8-4e99-86b9-e5fe37451282", 0, "2e891d14-d7da-48a2-8186-64adc45ce835", "admin@email.com", true, false, null, "ADMIN@EMAIL.COM", "ADMIN.USER", "AQAAAAEAACcQAAAAEL5xA3bVli+ZLZSw+IOROIVVm+5abDQtkOJuOfdaXdjIvg1uvpp7GGlxTZfgjZcboA==", null, false, "8c43f6ff-be0a-4e72-b2aa-f6e37d38dbf2", false, "admin.user" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "1eb31813-4461-45ef-bc22-2f174fd8b477", "f01f0b8e-f9c8-4e99-86b9-e5fe37451282" },
+                    { "e5c63c5b-c276-460f-a7a3-dfd9177ed18f", "f01f0b8e-f9c8-4e99-86b9-e5fe37451282" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -314,6 +360,12 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Storages_ProductId",
+                table: "Storages",
+                column: "ProductId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -336,6 +388,9 @@ namespace LuccaStore.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderLines");
+
+            migrationBuilder.DropTable(
+                name: "Storages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

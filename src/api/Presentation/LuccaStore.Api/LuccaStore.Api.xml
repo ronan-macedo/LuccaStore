@@ -28,7 +28,7 @@
             <returns>Returns the username and email of a new user.</returns>
             <response code="200">Returns the username and email of a new user.</response>
             <response code="400">Error message.</response>
-            <response code="401">The unauthorized message.</response>
+            <response code="401">The unauthorized message.</response>]        
         </member>
         <member name="M:LuccaStore.Api.Controllers.IdentityController.Register(LuccaStore.Core.Domain.Dtos.Identity.RegisterRequestDto,LuccaStore.Api.Validators.Identity.RegisterRequestDtoValidator)">
             <summary>

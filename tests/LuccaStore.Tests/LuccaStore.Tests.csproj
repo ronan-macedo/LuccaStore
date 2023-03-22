@@ -33,10 +33,4 @@
     <ProjectReference Include="..\..\src\api\Presentation\LuccaStore.Api\LuccaStore.Api.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\Domain\" />
-    <Folder Include="Core\Application\" />
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
 </Project>

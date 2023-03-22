@@ -1,6 +1,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using FluentValidation;
+using LuccaStore.Core.Domain.Common;
 using LuccaStore.Infrastructure.Data.Context;
 using LuccaStore.Infrastructure.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,7 +17,6 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using MessageTemplate = LuccaStore.Core.Domain.MessageTemplate;
-using LuccaStore.Core.Domain.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +29,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterModule<ApplicationModule>();
-    builder.RegisterModule<AutoMapperModule>();    
+    builder.RegisterModule<AutoMapperModule>();
 });
 
 var path = builder.Configuration.GetValue<string>("LoggingPath");
@@ -154,7 +154,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League Manager API"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Football League Manager API"));    
 }
 
 // Add Middleware to handle the Unauthorize message
