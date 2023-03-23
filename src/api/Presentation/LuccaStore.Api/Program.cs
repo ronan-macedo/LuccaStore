@@ -18,11 +18,11 @@ using System.Reflection;
 using System.Text;
 using MessageTemplate = LuccaStore.Core.Domain.MessageTemplate;
 
-var builder = WebApplication.CreateBuilder(args);
-
 // Define application language to english by default
 CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+
+var builder = WebApplication.CreateBuilder(args);
 
 // DI using Autofac     
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());

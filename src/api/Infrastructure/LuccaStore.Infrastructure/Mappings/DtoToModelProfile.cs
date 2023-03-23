@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using LuccaStore.Core.Domain.Dtos.Categories;
 using LuccaStore.Core.Domain.Dtos.Identity;
+using LuccaStore.Core.Domain.Models.Categories;
 using LuccaStore.Core.Domain.Models.Identity;
 using LuccaStore.Domain.Models.Identity;
 
@@ -13,7 +15,12 @@ namespace LuccaStore.Infrastructure.Mappings
 
             CreateMap<RegisterRequestDto, RegisterModel>();
 
-            CreateMap<UnregisterRequestDto, UnregisterModel>();            
+            CreateMap<UnregisterRequestDto, UnregisterModel>();
+
+            CreateMap<CategoryRequestDto, CategoryModel>()
+                .ForMember(src => src.Id, opt => opt.Ignore())
+                .ForMember(src => src.CreateAt, opt => opt.Ignore())
+                .ForMember(src => src.UpdateAt, opt => opt.Ignore());
         }
     }
 }

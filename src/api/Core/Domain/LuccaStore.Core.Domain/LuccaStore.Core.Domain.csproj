@@ -30,4 +30,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\PaymentMethods\" />
+    <Folder Include="Models\PaymentMethods\" />
+  </ItemGroup>
+
 </Project>

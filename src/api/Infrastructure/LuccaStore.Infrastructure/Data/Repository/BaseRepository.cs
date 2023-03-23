@@ -1,11 +1,13 @@
-﻿using LuccaStore.Core.Domain.Entities;
+﻿using LuccaStore.Core.Application.Exceptions;
+using LuccaStore.Core.Domain;
+using LuccaStore.Core.Domain.Entities;
 using LuccaStore.Core.Domain.Interfaces;
 using LuccaStore.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace LuccaStore.Infrastructure.Data.Repository
 {
-    public class BaseRepository<T> : IRepository<T> where T : BaseEntity
+    public class BaseRepository<T> : IRepository<T> where T : BaseEntity 
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<T> _dbSet;
@@ -24,7 +26,8 @@ namespace LuccaStore.Infrastructure.Data.Repository
 
                 if (result == null)
                 {
-                    return false;
+                    throw new NotFoundException(MessageTemplate.EntityNotFoundMessage,
+                                                MessageTemplate.EntityNotFoundError);
                 }
 
                 _dbSet.Remove(result);
@@ -44,26 +47,28 @@ namespace LuccaStore.Infrastructure.Data.Repository
 
         public async Task<IEnumerable<T>?> GetAllAsync()
         {
-            try
+            var entities = await _dbSet.ToListAsync();
+
+            if (entities == null)
             {
-                return await _dbSet.ToListAsync();
+                throw new NotFoundException(MessageTemplate.EntityNotFoundMessage,
+                                            MessageTemplate.EntityNotFoundError);
             }
-            catch (Exception)
-            {
-                return null;
-            }
+
+            return entities;
         }
 
         public async Task<T?> GetByIdAsync(Guid id)
         {
-            try
+            var entity = await _dbSet.SingleOrDefaultAsync(e => e.Id == id);
+
+            if (entity == null)
             {
-                return await _dbSet.SingleOrDefaultAsync(e => e.Id == id);
+                throw new NotFoundException(MessageTemplate.EntityNotFoundMessage,
+                                            MessageTemplate.EntityNotFoundError);
             }
-            catch (Exception)
-            {
-                return null;
-            }
+
+            return entity;
         }
 
         public async Task<T?> InsertAsync(T entity)
@@ -75,7 +80,8 @@ namespace LuccaStore.Infrastructure.Data.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw new InvalidParametersException(MessageTemplate.InsertErrorMessage,
+                                                     MessageTemplate.InsertError);
             }
 
             return entity;
@@ -89,7 +95,8 @@ namespace LuccaStore.Infrastructure.Data.Repository
 
                 if (result == null)
                 {
-                    return null;
+                    throw new NotFoundException(MessageTemplate.EntityNotFoundMessage,
+                                                MessageTemplate.EntityNotFoundError);
                 }
 
                 _context.Entry(result).CurrentValues.SetValues(entity);
@@ -97,7 +104,8 @@ namespace LuccaStore.Infrastructure.Data.Repository
             }
             catch (Exception)
             {
-                return null;
+                throw new InvalidParametersException(MessageTemplate.UpdateErrorMessage,
+                                                     MessageTemplate.UpdateError);
             }
 
             return entity;

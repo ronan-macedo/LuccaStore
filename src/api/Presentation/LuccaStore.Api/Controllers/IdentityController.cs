@@ -10,7 +10,7 @@ using System.Net;
 namespace LuccaStore.Api.Controllers
 {
     /// <summary>
-    /// Identity Endpoints
+    /// Identity Endpoints.
     /// </summary>
     [Route("lucca-store-api/v1/identity")]
     public class IdentityController : ApiControllerBase

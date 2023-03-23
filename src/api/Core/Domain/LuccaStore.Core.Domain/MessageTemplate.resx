@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DeleteError" xml:space="preserve">
+    <value>Delete error.</value>
+  </data>
+  <data name="DeleteErrorMessage" xml:space="preserve">
+    <value>An error happens while delete an entity.</value>
+  </data>
+  <data name="EntityNotFoundError" xml:space="preserve">
+    <value>Entity not found.</value>
+  </data>
+  <data name="EntityNotFoundMessage" xml:space="preserve">
+    <value>The entity you are looking for not exist in the current context.</value>
+  </data>
+  <data name="InsertError" xml:space="preserve">
+    <value>Insert error.</value>
+  </data>
+  <data name="InsertErrorMessage" xml:space="preserve">
+    <value>An error happens while inserting a new entity.</value>
+  </data>
   <data name="InvalidCredentialsError" xml:space="preserve">
     <value>Invalid credentials.</value>
   </data>
   <data name="InvalidCredentialsMessage" xml:space="preserve">
     <value>Invalid credentials. Please, verify your username or password.</value>
+  </data>
+  <data name="InvalidGuidError" xml:space="preserve">
+    <value>Invalid Guid.</value>
+  </data>
+  <data name="InvalidGuidErrorMessage" xml:space="preserve">
+    <value>The current Guid is null or empty Guid.</value>
   </data>
   <data name="InvalidUserError" xml:space="preserve">
     <value>Invalid user.</value>
@@ -133,7 +157,7 @@
     <value>An error happens while registering a new user.</value>
   </data>
   <data name="UnauthorizedError" xml:space="preserve">
-    <value>Unauthorized</value>
+    <value>Unauthorized.</value>
   </data>
   <data name="UnauthorizedMessage" xml:space="preserve">
     <value>Unauthorized access. Please, enter your credentials first.</value>
@@ -143,6 +167,12 @@
   </data>
   <data name="UnregistrationErrorMessage" xml:space="preserve">
     <value>An error happens while unregistering a user.</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>Update error.</value>
+  </data>
+  <data name="UpdateErrorMessage" xml:space="preserve">
+    <value>An error happens while updating an entity.</value>
   </data>
   <data name="UserExistsMessage" xml:space="preserve">
     <value>User already exists.</value>

@@ -7,6 +7,6 @@ namespace LuccaStore.Core.Domain.Entities
         [Key]
         public Guid Id { get; set; }
         public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
     }
 }

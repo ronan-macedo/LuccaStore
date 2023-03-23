@@ -17,6 +17,8 @@ namespace LuccaStore.Infrastructure.DependencyInjection
             {
                 config.AddProfile<DtoToModelProfile>();
                 config.AddProfile<ModelToDtoProfile>();
+                config.AddProfile<EntityToModelProfile>();
+                config.AddProfile<EntityToDtoProfile>();
             })).AsSelf().SingleInstance();
 
             builder.Register(context => context.Resolve<MapperConfiguration>().CreateMapper()).As<IMapper>();

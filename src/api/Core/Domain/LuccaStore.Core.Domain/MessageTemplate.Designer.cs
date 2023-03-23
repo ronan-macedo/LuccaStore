@@ -61,6 +61,60 @@ namespace LuccaStore.Core.Domain {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete error..
+        /// </summary>
+        public static string DeleteError {
+            get {
+                return ResourceManager.GetString("DeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error happens while delete an entity..
+        /// </summary>
+        public static string DeleteErrorMessage {
+            get {
+                return ResourceManager.GetString("DeleteErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity not found..
+        /// </summary>
+        public static string EntityNotFoundError {
+            get {
+                return ResourceManager.GetString("EntityNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The entity you are looking for not exist in the current context..
+        /// </summary>
+        public static string EntityNotFoundMessage {
+            get {
+                return ResourceManager.GetString("EntityNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert error..
+        /// </summary>
+        public static string InsertError {
+            get {
+                return ResourceManager.GetString("InsertError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error happens while inserting a new entity..
+        /// </summary>
+        public static string InsertErrorMessage {
+            get {
+                return ResourceManager.GetString("InsertErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid credentials..
         /// </summary>
         public static string InvalidCredentialsError {
@@ -75,6 +129,24 @@ namespace LuccaStore.Core.Domain {
         public static string InvalidCredentialsMessage {
             get {
                 return ResourceManager.GetString("InvalidCredentialsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Guid..
+        /// </summary>
+        public static string InvalidGuidError {
+            get {
+                return ResourceManager.GetString("InvalidGuidError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The current Guid is null or empty Guid..
+        /// </summary>
+        public static string InvalidGuidErrorMessage {
+            get {
+                return ResourceManager.GetString("InvalidGuidErrorMessage", resourceCulture);
             }
         }
         
@@ -106,7 +178,7 @@ namespace LuccaStore.Core.Domain {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unauthorized.
+        ///   Looks up a localized string similar to Unauthorized..
         /// </summary>
         public static string UnauthorizedError {
             get {
@@ -138,6 +210,24 @@ namespace LuccaStore.Core.Domain {
         public static string UnregistrationErrorMessage {
             get {
                 return ResourceManager.GetString("UnregistrationErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update error..
+        /// </summary>
+        public static string UpdateError {
+            get {
+                return ResourceManager.GetString("UpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error happens while updating an entity..
+        /// </summary>
+        public static string UpdateErrorMessage {
+            get {
+                return ResourceManager.GetString("UpdateErrorMessage", resourceCulture);
             }
         }
         
