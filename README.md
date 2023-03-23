@@ -18,5 +18,5 @@ A store application with front-end and back-end. Using clean architecture in the
 **Server:** .NET Core 6, C#
 
 <p align="center">
-	![Logo](https://github.com/ronan-macedo/LuccaStore/blob/main/src/web/LuccaStore.Web/src/assets/animated-logo.gif)
+	<img src="https://github.com/ronan-macedo/LuccaStore/blob/main/src/web/LuccaStore.Web/src/assets/animated-logo.gif" alt="logo"/>
 </p>
