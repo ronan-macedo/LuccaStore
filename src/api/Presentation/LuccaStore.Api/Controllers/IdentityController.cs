@@ -23,6 +23,44 @@ namespace LuccaStore.Api.Controllers
         }
 
         /// <summary>
+        /// Get a list of user roles.
+        /// </summary>
+        /// <returns>Returns a list of user roles.</returns>
+        /// <response code="200">Returns a list of user roles.</response>
+        /// <response code="400">Error message.</response>
+        /// <response code="401">The unauthorized message.</response>
+        /// <response code="500">The exception message.</response>
+        [Authorize(Roles = "User")]
+        [HttpGet("roles/{username}")]
+        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<IEnumerable<string>>> GetRoles([FromRoute] string username, [FromServices] UsernameValidator validator)
+        {
+            var validationResult = validator.Validate(username);
+            if (!validationResult.IsValid)
+            {
+                return ValidationFailure(validationResult);
+            }
+
+            try
+            {
+                var result = await _identityService.GetRolesAsync(username);
+
+                return Ok(result);
+            }
+            catch (NotFoundException notFoundExc)
+            {
+                return ErrorResponse(notFoundExc.ErrorCode,
+                                     notFoundExc.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        /// <summary>
         /// Login to the api.
         /// </summary>
         /// <param name="request"></param>
@@ -30,6 +68,7 @@ namespace LuccaStore.Api.Controllers
         /// <returns>Return an access token.</returns>
         /// <response code="200">The access token.</response>
         /// <response code="400">Error message.</response>
+        /// <response code="500">The exception message.</response>
         [AllowAnonymous]
         [HttpPost("login")]        
         [ProducesResponseType(typeof(LoginResponseDto), StatusCodes.Status200OK)]
@@ -68,13 +107,14 @@ namespace LuccaStore.Api.Controllers
         /// <returns>Returns the username and email of a new user.</returns>
         /// <response code="200">Returns the username and email of a new user.</response>
         /// <response code="400">Error message.</response>
-        /// <response code="401">The unauthorized message.</response>]        
+        /// <response code="401">The unauthorized message.</response>
+        /// <response code="500">The exception message.</response>
         [Authorize(Roles = "Admin")]
         [HttpPost("register-admin")]
         [ProducesResponseType(typeof(RegisterResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<RegisterResponseDto>> RegisterAdmin([FromBody] RegisterRequestDto request,
+        public async Task<ActionResult<RegisterResponseDto>> RegisterAdmin(RegisterRequestDto request,
                                                                            [FromServices] RegisterRequestDtoValidator validator)
         {
             var validationResult = validator.Validate(request);
@@ -109,12 +149,13 @@ namespace LuccaStore.Api.Controllers
         /// <response code="200">Returns the username and email of a new user.</response>
         /// <response code="400">Error message.</response>
         /// <response code="401">The unauthorized message.</response>
+        /// <response code="500">The exception message.</response>
         [Authorize(Roles = "User")]
         [HttpPost("register")]
         [ProducesResponseType(typeof(RegisterResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<RegisterResponseDto>> Register([FromBody] RegisterRequestDto request,
+        public async Task<ActionResult<RegisterResponseDto>> Register(RegisterRequestDto request,
                                                                       [FromServices] RegisterRequestDtoValidator validator)
         {
             var validationResult = validator.Validate(request);
@@ -149,12 +190,13 @@ namespace LuccaStore.Api.Controllers
         /// <response code="200">Returns the username of the deleted user.</response>
         /// <response code="400">Error message.</response>
         /// <response code="401">The unauthorized message.</response>
+        /// <response code="500">The exception message.</response>
         [Authorize(Roles = "Admin")]
         [HttpPost("unregister")]
         [ProducesResponseType(typeof(UnregisterResponseDto), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<UnregisterResponseDto>> Unregister([FromBody] UnregisterRequestDto request,
+        public async Task<ActionResult<UnregisterResponseDto>> Unregister(UnregisterRequestDto request,
                                                                           [FromServices] UnregisterRequestDtoValidator validator)
         {
             var validationResult = validator.Validate(request);
@@ -169,6 +211,11 @@ namespace LuccaStore.Api.Controllers
 
                 return Ok(result);
             }
+            catch (NotFoundException notFoundExc)
+            {
+                return ErrorResponse(notFoundExc.ErrorCode,
+                                     notFoundExc.Message);
+            }
             catch (InvalidParametersException invalidParamExc)
             {
                 return ErrorResponse(invalidParamExc.ErrorCode,
@@ -178,6 +225,6 @@ namespace LuccaStore.Api.Controllers
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
-        }
+        }        
     }
 }

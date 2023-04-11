@@ -23,6 +23,11 @@ namespace LuccaStore.Application.Services
             _mapper = mapper;
         }
 
+        public Task<IEnumerable<string>> GetRolesAsync(string username)
+        {
+            return _identityRepository.GetRolesAsync(username);
+        }
+
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto login)
         {
             var loginModel = _mapper.Map<LoginModel>(login);
@@ -33,6 +38,7 @@ namespace LuccaStore.Application.Services
 
             return new LoginResponseDto
             {
+                Username = loginModel.Username,
                 AccessToken = token,
                 ExpireIn = DateTime.UtcNow.AddHours(2)
             };

@@ -6,6 +6,7 @@ using LuccaStore.Core.Domain;
 using LuccaStore.Core.Domain.Constants;
 using LuccaStore.Core.Domain.Interfaces;
 using LuccaStore.Core.Domain.Entities;
+using Serilog;
 
 namespace LuccaStore.Infrastructure.Data.Repository
 {
@@ -18,6 +19,19 @@ namespace LuccaStore.Infrastructure.Data.Repository
         {
             _userManager = userManager;
             _roleManager = roleManager;
+        }
+
+        public async Task<IEnumerable<string>> GetRolesAsync(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+            {
+                throw new NotFoundException(MessageTemplate.InvalidUserError,
+                                            MessageTemplate.UserNotExistsMessage);
+            }
+
+            return await _userManager.GetRolesAsync(user);
         }
 
         public async Task<IdentityEntity> LoginAsync(LoginModel login)
@@ -80,7 +94,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
             if (userExists != null)
             {
                 throw new InvalidParametersException(MessageTemplate.UserExistsMessage,
-                                                    MessageTemplate.InvalidUserError);
+                                                     MessageTemplate.InvalidUserError);
             }
 
             var user = new IdentityUser
@@ -95,7 +109,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
             if (!result.Succeeded)
             {
                 throw new InvalidParametersException(MessageTemplate.RegistrationErrorMessage,
-                                                    MessageTemplate.RegistrationError);
+                                                     MessageTemplate.RegistrationError);
             }
 
             if (await _roleManager.RoleExistsAsync(UserRoles.User))
@@ -109,8 +123,8 @@ namespace LuccaStore.Infrastructure.Data.Repository
             var user = await _userManager.FindByNameAsync(unregister.Username);
             if (user == null)
             {
-                throw new InvalidParametersException(MessageTemplate.InvalidUserError,
-                                                     MessageTemplate.UserNotExistsMessage);
+                throw new NotFoundException(MessageTemplate.InvalidUserError,
+                                            MessageTemplate.UserNotExistsMessage);
             }
 
             var result = await _userManager.DeleteAsync(user);

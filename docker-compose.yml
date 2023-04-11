@@ -1,6 +1,12 @@
-version: '2.2'
+version: '3.4'
+
 services:
-  sql:
+  luccastore.api:
+    image: ${DOCKER_REGISTRY-}luccastoreapi
+    build:
+      context: .
+      dockerfile: src/api/Presentation/LuccaStore.Api/Dockerfile
+  mssqldb:
     image: 'mcr.microsoft.com/mssql/server:2017-latest'
     environment:
       ACCEPT_EULA: 'Y'
@@ -8,13 +14,13 @@ services:
     ports:
       - '1433:1433'
     volumes:
-      - '.\data\volumes\sqlserver:/var/opt/mssql/data'
+      - '..\data\volumes\sqlserver:/var/opt/mssql/data'
   psqldb:
     image: postgres
     environment:
       POSTGRES_PASSWORD: 'P@55w0rd#2023'
       restart: always
     volumes:
-      - '.\data\volumes\psql\mount:/var/lib/postgresql/data'
+      - '..\data\volumes\psql\mount:/var/lib/postgresql/data'
     ports:
       - '5432:5432'

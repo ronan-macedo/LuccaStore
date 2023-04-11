@@ -61,6 +61,15 @@ namespace LuccaStore.Core.Domain {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category already exists..
+        /// </summary>
+        public static string CategoryExistsMessage {
+            get {
+                return ResourceManager.GetString("CategoryExistsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete error..
         /// </summary>
         public static string DeleteError {
@@ -111,6 +120,15 @@ namespace LuccaStore.Core.Domain {
         public static string InsertErrorMessage {
             get {
                 return ResourceManager.GetString("InsertErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid category..
+        /// </summary>
+        public static string InvalidCategoryError {
+            get {
+                return ResourceManager.GetString("InvalidCategoryError", resourceCulture);
             }
         }
         

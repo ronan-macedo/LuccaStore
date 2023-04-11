@@ -28,6 +28,14 @@ namespace LuccaStore.Core.Application.Services
             model.CreateAt = DateTime.UtcNow;
 
             var entity = _mapper.Map<CategoryEntity>(model);
+
+            var existCategory = await _categoryRepository.CategoryNameExistsAsync(entity.CategoryName);
+            if (existCategory)
+            {
+                throw new InvalidParametersException(MessageTemplate.InvalidCategoryError,
+                                                     MessageTemplate.CategoryExistsMessage);
+            }
+
             var result = await _categoryRepository.InsertAsync(entity);
 
             return _mapper.Map<CategoryResponseDto>(result);

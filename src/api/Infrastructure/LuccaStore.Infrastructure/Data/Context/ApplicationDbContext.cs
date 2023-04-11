@@ -13,6 +13,7 @@ namespace LuccaStore.Infrastructure.Data.Context
         public DbSet<PaymentMethodEntity> PaymentMethods { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<StorageEntity> Storages { get; set; }
+        public DbSet<PaymentTypeEntity> PaymentTypes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -27,6 +28,7 @@ namespace LuccaStore.Infrastructure.Data.Context
             builder.Entity<PaymentMethodEntity>().ToTable("PaymentMethods");
             builder.Entity<ProductEntity>().ToTable("Products");
             builder.Entity<StorageEntity>().ToTable("Storages");
+            builder.Entity<PaymentTypeEntity>().ToTable("PaymentTypes");
 
             /**
              * Seeding Identity Users and User Roles.

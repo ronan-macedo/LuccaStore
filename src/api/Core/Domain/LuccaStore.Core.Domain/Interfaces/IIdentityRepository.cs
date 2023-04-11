@@ -6,9 +6,10 @@ namespace LuccaStore.Core.Domain.Interfaces
 {
     public interface IIdentityRepository
     {
+        Task<IEnumerable<string>> GetRolesAsync(string username);
         Task<IdentityEntity> LoginAsync(LoginModel login);
         Task RegisterAsync(RegisterModel register);
         Task RegisterAdminAsync(RegisterModel register);
-        Task UnregisterAsync(UnregisterModel unregister);
+        Task UnregisterAsync(UnregisterModel unregister);        
     }
 }

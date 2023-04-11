@@ -3,6 +3,7 @@ using System;
 using LuccaStore.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LuccaStore.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230324022948_UpdateCategoryTable")]
+    partial class UpdateCategoryTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,38 +114,15 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("PaymentTypeId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PaymentTypeId");
 
                     b.ToTable("PaymentMethods", (string)null);
-                });
-
-            modelBuilder.Entity("LuccaStore.Core.Domain.Entities.PaymentTypeEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("PaymentTypeName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentTypes", (string)null);
                 });
 
             modelBuilder.Entity("LuccaStore.Core.Domain.Entities.ProductEntity", b =>
@@ -231,15 +211,15 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c3c58c39-9c6f-40da-a6bb-56ee67d3ad71",
-                            ConcurrencyStamp = "c3c58c39-9c6f-40da-a6bb-56ee67d3ad71",
+                            Id = "c92e060b-d6bf-47c9-bec6-23669a79cb2d",
+                            ConcurrencyStamp = "c92e060b-d6bf-47c9-bec6-23669a79cb2d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "bf2daf9f-7be2-4de8-9c4e-013f3010a0ec",
-                            ConcurrencyStamp = "bf2daf9f-7be2-4de8-9c4e-013f3010a0ec",
+                            Id = "a21441fd-011c-482f-8467-98c41dd8b094",
+                            ConcurrencyStamp = "a21441fd-011c-482f-8467-98c41dd8b094",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -336,17 +316,17 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1e32bc22-4493-4be9-8e08-858f7ccd2629",
+                            Id = "95a0989c-f937-4a5f-a0ca-c1097026b270",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2af39870-729e-420d-97ca-fe88d07395cd",
+                            ConcurrencyStamp = "ce113943-b8cf-4569-b039-5466842aa4c6",
                             Email = "admin@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EMAIL.COM",
                             NormalizedUserName = "ADMIN.USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAECZgCCpeAw5/qoORNPiJu8dUZkq5IN/7f6WuLv2RTbDPOYebxjvJ/LyCCIqh/DJ+Uw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL9aqQUL8BHZIj5TBghxoUxdgupf3FmByccv3SOaOqT+uaHFN+A0p+YxOHkOLuZEcA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4514517b-d162-4e3a-a5c9-82ae0af7b174",
+                            SecurityStamp = "00e7855c-c28f-4b30-b0f7-eaf7261f3d69",
                             TwoFactorEnabled = false,
                             UserName = "admin.user"
                         });
@@ -416,13 +396,13 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "1e32bc22-4493-4be9-8e08-858f7ccd2629",
-                            RoleId = "c3c58c39-9c6f-40da-a6bb-56ee67d3ad71"
+                            UserId = "95a0989c-f937-4a5f-a0ca-c1097026b270",
+                            RoleId = "c92e060b-d6bf-47c9-bec6-23669a79cb2d"
                         },
                         new
                         {
-                            UserId = "1e32bc22-4493-4be9-8e08-858f7ccd2629",
-                            RoleId = "bf2daf9f-7be2-4de8-9c4e-013f3010a0ec"
+                            UserId = "95a0989c-f937-4a5f-a0ca-c1097026b270",
+                            RoleId = "a21441fd-011c-482f-8467-98c41dd8b094"
                         });
                 });
 
@@ -473,17 +453,6 @@ namespace LuccaStore.Infrastructure.Data.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("LuccaStore.Core.Domain.Entities.PaymentMethodEntity", b =>
-                {
-                    b.HasOne("LuccaStore.Core.Domain.Entities.PaymentTypeEntity", "PaymentType")
-                        .WithMany("PaymentMethods")
-                        .HasForeignKey("PaymentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PaymentType");
                 });
 
             modelBuilder.Entity("LuccaStore.Core.Domain.Entities.ProductEntity", b =>
@@ -567,11 +536,6 @@ namespace LuccaStore.Infrastructure.Data.Migrations
             modelBuilder.Entity("LuccaStore.Core.Domain.Entities.OrderEntity", b =>
                 {
                     b.Navigation("Lines");
-                });
-
-            modelBuilder.Entity("LuccaStore.Core.Domain.Entities.PaymentTypeEntity", b =>
-                {
-                    b.Navigation("PaymentMethods");
                 });
 
             modelBuilder.Entity("LuccaStore.Core.Domain.Entities.ProductEntity", b =>

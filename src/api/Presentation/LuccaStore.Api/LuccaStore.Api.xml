@@ -4,10 +4,97 @@
         <name>LuccaStore.Api</name>
     </assembly>
     <members>
+        <member name="T:LuccaStore.Api.Controllers.CategoriesController">
+            <summary>
+            Categories endpoints.
+            </summary>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.CategoriesController.CreateCategory(LuccaStore.Core.Domain.Dtos.Categories.CategoryRequestDto,LuccaStore.Api.Validators.Category.CategoryRequestDtoValidator)">
+            <summary>
+            Create new category.
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+            <returns>Returns new category details.</returns>
+            <response code="200">Returns new category details.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.CategoriesController.DeleteCategory(System.Nullable{System.Guid},LuccaStore.Api.Validators.Category.CategoryIdValidator)">
+            <summary>
+            Delete a category.
+            </summary>
+            <param name="categoryId"></param>
+            <param name="validator"></param>
+            <returns>Returns the Id of the deleted category.</returns>
+            <response code="200">Returns the Id of the deleted category.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.CategoriesController.GetAllCategories">
+            <summary>
+            Get all categories.
+            </summary>
+            <returns>Returns all the categories.</returns>
+            <response code="200">Returns all the categories.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.CategoriesController.GetCategoryById(System.Nullable{System.Guid},LuccaStore.Api.Validators.Category.CategoryIdValidator)">
+            <summary>
+            Get the category by its Id
+            </summary>
+            <param name="categoryId"></param>
+            <param name="validator"></param>
+            <returns>Returns a category details.</returns>
+            <response code="200">Returns a category details.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.CategoriesController.GetCategoryByName(LuccaStore.Core.Domain.Dtos.Categories.CategoryRequestDto,LuccaStore.Api.Validators.Category.CategoryRequestDtoValidator)">
+            <summary>
+            Get category by its name
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+            <returns>Returns a category details.</returns>
+            <response code="200">Returns a category details.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.CategoriesController.UpdateCategorye(LuccaStore.Core.Domain.Dtos.Categories.CategoryRequestDto,System.Nullable{System.Guid},LuccaStore.Api.Validators.Category.CategoryRequestDtoValidator,LuccaStore.Api.Validators.Category.CategoryIdValidator)">
+            <summary>
+            Update a category
+            </summary>
+            <param name="request"></param>
+            <param name="categoryId"></param>
+            <param name="validator"></param>
+            <param name="guidValidator"></param>
+            <returns>Returns an updated category details.</returns>
+            <response code="200">Returns an updated category details.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
+        </member>
         <member name="T:LuccaStore.Api.Controllers.IdentityController">
             <summary>
-            Identity Endpoints
+            Identity Endpoints.
             </summary>
+        </member>
+        <member name="M:LuccaStore.Api.Controllers.IdentityController.GetRoles(System.String,LuccaStore.Api.Validators.Identity.UsernameValidator)">
+            <summary>
+            Get a list of user roles.
+            </summary>
+            <returns>Returns a list of user roles.</returns>
+            <response code="200">Returns a list of user roles.</response>
+            <response code="400">Error message.</response>
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
         </member>
         <member name="M:LuccaStore.Api.Controllers.IdentityController.Login(LuccaStore.Core.Domain.Dtos.Identity.LoginRequestDto,LuccaStore.Api.Validators.Identity.LoginRequestDtoValidator)">
             <summary>
@@ -18,6 +105,7 @@
             <returns>Return an access token.</returns>
             <response code="200">The access token.</response>
             <response code="400">Error message.</response>
+            <response code="500">The exception message.</response>
         </member>
         <member name="M:LuccaStore.Api.Controllers.IdentityController.RegisterAdmin(LuccaStore.Core.Domain.Dtos.Identity.RegisterRequestDto,LuccaStore.Api.Validators.Identity.RegisterRequestDtoValidator)">
             <summary>
@@ -28,7 +116,8 @@
             <returns>Returns the username and email of a new user.</returns>
             <response code="200">Returns the username and email of a new user.</response>
             <response code="400">Error message.</response>
-            <response code="401">The unauthorized message.</response>]        
+            <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
         </member>
         <member name="M:LuccaStore.Api.Controllers.IdentityController.Register(LuccaStore.Core.Domain.Dtos.Identity.RegisterRequestDto,LuccaStore.Api.Validators.Identity.RegisterRequestDtoValidator)">
             <summary>
@@ -40,6 +129,7 @@
             <response code="200">Returns the username and email of a new user.</response>
             <response code="400">Error message.</response>
             <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
         </member>
         <member name="M:LuccaStore.Api.Controllers.IdentityController.Unregister(LuccaStore.Core.Domain.Dtos.Identity.UnregisterRequestDto,LuccaStore.Api.Validators.Identity.UnregisterRequestDtoValidator)">
             <summary>
@@ -51,6 +141,7 @@
             <response code="200">Returns the username of the deleted user.</response>
             <response code="400">Error message.</response>
             <response code="401">The unauthorized message.</response>
+            <response code="500">The exception message.</response>
         </member>
     </members>
 </doc>

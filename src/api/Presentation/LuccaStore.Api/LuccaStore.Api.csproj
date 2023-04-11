@@ -9,6 +9,7 @@
     <DockerfileContext>..\..\..\..</DockerfileContext>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>LuccaStore.Api.xml</DocumentationFile>
+    <DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

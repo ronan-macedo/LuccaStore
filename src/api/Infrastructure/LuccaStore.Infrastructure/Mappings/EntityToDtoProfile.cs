@@ -9,8 +9,6 @@ namespace LuccaStore.Infrastructure.Mappings
         public EntityToDtoProfile()
         {
             CreateMap<CategoryEntity, CategoryResponseDto>();
-            
-            CreateMap<IEnumerable<CategoryEntity>, IEnumerable<CategoryResponseDto>>();
         }
     }
 }

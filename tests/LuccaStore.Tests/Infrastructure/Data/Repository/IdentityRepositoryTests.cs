@@ -193,7 +193,7 @@ namespace LuccaStore.Tests.Infrastructure.Data.Repository
                 .Returns(Task.FromResult<IdentityUser>(null!));
 
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidParametersException>(async () => await _sut.UnregisterAsync(model));
+            await Assert.ThrowsAsync<NotFoundException>(async () => await _sut.UnregisterAsync(model));
         }
 
         [Theory, AutoData]

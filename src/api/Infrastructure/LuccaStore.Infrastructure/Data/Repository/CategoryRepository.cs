@@ -16,6 +16,18 @@ namespace LuccaStore.Infrastructure.Data.Repository
             _dbSet = context.Set<CategoryEntity>();
         }
 
+        public async Task<bool> CategoryNameExistsAsync(string categoryName)
+        {
+            var entity = await _dbSet.SingleOrDefaultAsync(c => c.CategoryName.Contains(categoryName));
+
+            if (entity == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<CategoryEntity> GetByCategoryNameAsync(string categoryName)
         {
             var entity = await _dbSet.SingleOrDefaultAsync(c => c.CategoryName.Contains(categoryName));
