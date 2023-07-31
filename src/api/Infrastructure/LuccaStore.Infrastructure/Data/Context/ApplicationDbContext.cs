@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LuccaStore.Infrastructure.Data.Context
 {
+    [ExcludeFromCodeCoverage]
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<CategoryEntity> Categories { get; set; }

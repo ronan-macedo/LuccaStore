@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LuccaStore.Infrastructure.Data.Context
 {
+    [ExcludeFromCodeCoverage]
     public class DbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)

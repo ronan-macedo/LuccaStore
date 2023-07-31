@@ -1,7 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.Serialization;
 
 namespace LuccaStore.Core.Application.Exceptions
 {
+    [ExcludeFromCodeCoverage]
     [Serializable]
     public class CommonException : Exception
     {

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\PaymentMethods\**" />
+    <EmbeddedResource Remove="Models\PaymentMethods\**" />
+    <None Remove="Models\PaymentMethods\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.5.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
@@ -32,7 +38,6 @@
 
   <ItemGroup>
     <Folder Include="Dtos\PaymentMethods\" />
-    <Folder Include="Models\PaymentMethods\" />
   </ItemGroup>
 
 </Project>

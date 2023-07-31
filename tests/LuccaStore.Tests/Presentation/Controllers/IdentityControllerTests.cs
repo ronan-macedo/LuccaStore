@@ -23,6 +23,76 @@ namespace LuccaStore.Tests.Presentation.Controllers
             _sut = new IdentityController(_identityService);
         }
 
+        #region Get GetRoles
+        [Theory, AutoData]
+        public async Task GetRoles_ReceiveValidRequest_ReturnsOk(string username,
+                                                                 UsernameValidator validator,
+                                                                 List<string> roles)
+        {
+            // Arrange
+            _identityService.GetRolesAsync(Arg.Any<string>()).Returns(roles);
+
+            // Act
+            var actual = await _sut.GetRoles(username, validator);
+
+            // Assert
+            var objectResult = (ObjectResult?)actual.Result;
+
+            Assert.Equal(StatusCodes.Status200OK, objectResult?.StatusCode);
+            Assert.IsType<List<string>>(objectResult?.Value);
+        }
+
+        [Theory, AutoData]
+        public async Task GetRoles_NotValidateRequest_ReturnsBadRequest(UsernameValidator validator)
+        {
+            // Arrange
+            var username = string.Empty;
+
+            // Act
+            var actual = await _sut.GetRoles(username, validator);
+
+            // Assert
+            var objectResult = (ObjectResult?)actual.Result;
+
+            Assert.Equal(StatusCodes.Status400BadRequest, objectResult?.StatusCode);
+            Assert.IsType<ApiErrorResponse>(objectResult?.Value);
+        }
+
+        [Theory, AutoData]
+        public async Task GetRoles_ReceiveInvalidRequest_ThrowsException(string username,
+                                                                         UsernameValidator validator)
+        {
+            // Arrange
+            _identityService.GetRolesAsync(Arg.Any<string>())
+                            .ThrowsAsync(new Exception("test"));
+
+            // Act
+            var actual = await _sut.GetRoles(username, validator);
+
+            // Assert
+            var objectResult = (ObjectResult?)actual.Result;
+
+            Assert.Equal(StatusCodes.Status500InternalServerError, objectResult?.StatusCode);
+        }
+
+        [Theory, AutoData]
+        public async Task GetRoles_ReceiveInvalidRequest_NotFoundException(string username,
+                                                                           UsernameValidator validator)
+        {
+            // Arrange
+            _identityService.GetRolesAsync(Arg.Any<string>())
+                            .ThrowsAsync(new NotFoundException("test"));
+
+            // Act
+            var actual = await _sut.GetRoles(username, validator);
+
+            // Assert
+            var objectResult = (ObjectResult?)actual.Result;
+
+            Assert.Equal(StatusCodes.Status400BadRequest, objectResult?.StatusCode);
+        }
+        #endregion
+
         #region POST Login
         [Theory, AutoData]
         public async Task Login_ReceiveValidRequest_ReturnsOK(LoginRequestDto request,

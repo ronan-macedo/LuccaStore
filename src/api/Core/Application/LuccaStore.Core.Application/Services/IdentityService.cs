@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using LuccaStore.Core.Application.Exceptions;
 using LuccaStore.Core.Application.Interfaces;
+using LuccaStore.Core.Domain;
 using LuccaStore.Core.Domain.Dtos.Identity;
 using LuccaStore.Core.Domain.Interfaces;
 using LuccaStore.Core.Domain.Models.Identity;
@@ -25,7 +27,15 @@ namespace LuccaStore.Application.Services
 
         public Task<IEnumerable<string>> GetRolesAsync(string username)
         {
-            return _identityRepository.GetRolesAsync(username);
+            var user = _identityRepository.GetRolesAsync(username);
+
+            if (user == null)
+            {
+                throw new NotFoundException(MessageTemplate.InvalidUserError,
+                                            MessageTemplate.UserNotExistsMessage);
+            }
+
+            return user;
         }
 
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto login)

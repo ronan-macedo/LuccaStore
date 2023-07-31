@@ -23,13 +23,7 @@ namespace LuccaStore.Infrastructure.Data.Repository
 
         public async Task<IEnumerable<string>> GetRolesAsync(string username)
         {
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
-            {
-                throw new NotFoundException(MessageTemplate.InvalidUserError,
-                                            MessageTemplate.UserNotExistsMessage);
-            }
+            var user = await _userManager.FindByNameAsync(username);            
 
             return await _userManager.GetRolesAsync(user);
         }

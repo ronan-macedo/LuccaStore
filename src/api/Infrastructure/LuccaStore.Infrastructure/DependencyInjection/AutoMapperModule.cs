@@ -1,9 +1,11 @@
 ﻿using Autofac;
 using AutoMapper;
 using LuccaStore.Infrastructure.Mappings;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LuccaStore.Infrastructure.DependencyInjection
 {
+    [ExcludeFromCodeCoverage]
     public class AutoMapperModule : Module
     {
         protected override void Load(ContainerBuilder builder)
